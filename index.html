@@ -6,16 +6,16 @@
     <title>Document</title>
     <script src="https://cdn.tiny.cloud/1/c1zrugu9p8aaf7aqo1lrguxiox6rhijywqjx9ppps1ht7hgx/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
+
 </head>
 <body>
     <script>
         tinymce.init({
           selector: 'textarea',
-          external_plugins: {
-             'a11y-links': 'https://github.com/umaidshahid/plugin-tester/a11y-links.min.js',
-             },
-          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat a11y-links',
+          external_plugins : { 'a11y-links' : 'https://wittjeff.github.io/tinymce-accessible-links-plugin/a11y-links.min.js',
+        },
+          plugins: 'anchor autolink charmap codesample emoticons image lists media searchreplace table visualblocks wordcount linkchecker',
+          toolbar: 'a11y-links undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
       </script>
       <textarea>
