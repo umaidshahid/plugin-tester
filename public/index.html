@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Checker</title>
+</head>
+<body>
+    <h1>Accessibility Checker</h1>
+    <textarea id="htmlInput" rows="10" cols="50" placeholder="Paste your HTML code here"></textarea><br>
+    <button onclick="checkAccessibility()">Check Accessibility</button>
+    <p id="status"></p>
+</body>
+<script>
+    async function checkAccessibility() {
+        const htmlInput = document.getElementById('htmlInput').value;
+        const status = document.getElementById('status');
+        status.textContent = 'Checking...';
+
+        try {
+            const response = await fetch('/check-accessibility', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ html: htmlInput })
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'accessibility-report.json';
+                a.click();
+                URL.revokeObjectURL(url);
+                status.textContent = 'Download ready';
+            } else {
+                const error = await response.text();
+                status.textContent = `Error: ${error}`;
+            }
+        } catch (error) {
+            status.textContent = `Error: ${error.message}`;
+        }
+    }
+</script>
+</html>
